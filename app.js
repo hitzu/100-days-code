@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const routeArrays = require("./routes/firtsDay.route")
+const routeArraysExercise = require("./routes/arrayExercise.route");
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
@@ -16,6 +17,6 @@ app.use((req,res,next)=>{
 });
 
 app.use('/firts-day', routeArrays);
-
+app.use('/array-exercise', routeArraysExercise);
 
 module.exports= app;
