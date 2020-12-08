@@ -6,13 +6,17 @@ const anagrama = (req, res) => {
         let cadena1 = clearString(string1);
         let cadena2 = clearString(string2);
         let flag = true;
-        const array1 = cadena1.split("").sort();
-        const array2 = cadena2.split("").sort();
-        array1.forEach((element,i) => {
-            if (element != array2[i]){
-                flag = false;
-            }
-        });
+        const cad1 = cadena1.split("").sort().join("");
+        const cad2 = cadena2.split("").sort().join("");
+        
+        //array1.forEach((element,i) => {
+          //  if (element != array2[i]){
+            //    flag = false;
+            //}
+        //});
+        if (cad1 != cad2){
+            flag = false;
+        }
         res.status(200).send({isAnagram : flag});
 
     }catch (err){
