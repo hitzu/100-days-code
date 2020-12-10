@@ -1,5 +1,34 @@
 'use strict'
 
+const sumaPares = (req, res) => {
+    try{
+        let {array1, k} = req.body;
+        // let finalArray = [];
+        // for (let i= 0; i<=array1.length; i++){
+        //     for (let j = i+1; j <= array1.length; j++){
+        //         if((array1[i]+array1[j])==k){
+        //             finalArray.push([array1[i], array1[j]]);
+        //         }
+        //     }
+        // }
+        let finalArray = [];
+        let savedNumber = {};
+        array1.forEach((number,i) => {
+            if (savedNumber[array1[i]] != undefined){
+                finalArray.push(savedNumber[array1[i]], number);
+                console.log(finalArray);
+            }else{
+                let auxNumber = k - number;
+                savedNumber[auxNumber] = array1[i];
+                console.log(savedNumber);
+            }
+        });
+        res.status(200).send({array1 : finalArray});
+    }catch(err){
+        res.status(500).send(err);
+    }
+}
+
 const anagrama = (req, res) => {
     try{
         let {string1, string2} = req.body;
@@ -67,4 +96,4 @@ const combinandoArray = async (req,res) => {
     }
 };
 
-module.exports = {anagrama, combinandoArray};
+module.exports = {anagrama, combinandoArray, sumaPares};
