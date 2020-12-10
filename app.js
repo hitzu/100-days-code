@@ -17,6 +17,7 @@ app.use((req,res,next)=>{
 });
 
 app.use('/firts-day', routeArrays);
+
 app.use('/array-exercise', routeArraysExercise);
 
 module.exports= app;
