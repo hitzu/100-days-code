@@ -1,5 +1,62 @@
 'use strict'
 
+const createArray = (req, res) => {
+    try{
+        console.log("holi");
+        let k = req.body.k;
+        let array = Array(k).fill().map(() => {
+            return Math.round(map.random()*100);
+            
+        })
+        res.status(200).send({resultado : array});
+    }catch (err){
+        res.status(500).send(err);
+    }
+}
+
+const busquedaBinaria = (req, res) => {
+    try{
+        let {array, k} = req.body;
+        array.sort((a, b) => a - b);
+        let bottom = 0, top = array.length;
+        const busqueda = (array, k, bottom, top) => {
+            let half = Math.round((bottom+top) / 2);
+            console.log(half);
+            if(top <= bottom){
+                return -1;
+            }
+            if (array[half] == k){
+                return array[half];
+            }
+            if(array[half] < k){
+                bottom = half + 1;
+            }
+            if (array[half] > k){
+                top = half - 1;
+            }
+            return busqueda(array, k, bottom, top);
+        }
+        
+        let result = busqueda (array, k, bottom, top);
+        // let i = 0, result = -1;
+        // while (array[i] != k && i < array.length){
+        //     i++;
+        // }
+
+
+        // for(let [i, number] of array.entries()){
+        //     if (number >= k){
+        //         result = number;
+        //         break;
+        //     }
+        //     console.log(i, number);
+        // }
+        res.status(200).send({resultado : result})
+        //res.status(200).send({resultado : i < array.length ? array[i] : -1});
+    }catch (err){
+        res.status(500).send(err);
+    }
+}
 const sumaPares = (req, res) => {
     try{
         let {array1, k} = req.body;
@@ -96,4 +153,4 @@ const combinandoArray = async (req,res) => {
     }
 };
 
-module.exports = {anagrama, combinandoArray, sumaPares};
+module.exports = {anagrama, combinandoArray, sumaPares, busquedaBinaria, createArray};
