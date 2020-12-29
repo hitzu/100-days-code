@@ -49,4 +49,18 @@ const getUserByID = (req,res) => {
     }}); 
 }
 
-module.exports = {getUsers, getUserByID};
+const getProfessionByUser = (req,res) => {
+    dataBaseRequestGetUser(req.query.idUser,(err, userFound) =>{
+        if (err){
+            res.status(500).send(err);
+        }else{
+            dataBaseRequestProfessionByID(userFound[0].profession_id, (err, professionFound) =>{
+                if (err){
+                    res.status(500).send(err);
+                }else{
+                res.status(200).send({users : professionFound[0]});
+            }})
+        }});
+}
+
+module.exports = {getUsers, getUserByID, getProfessionByUser};
